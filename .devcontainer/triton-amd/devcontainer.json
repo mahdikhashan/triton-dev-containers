@@ -1,0 +1,54 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "USERNAME": "mahdikhashan",
+      "USER_UID": "501",
+      "USER_GID": "20",
+      "CUSTOM_LLVM": "false",
+      "LLVM_TAG": "",
+      "HIP_VISIBLE_DEVICES": "${localEnv:HIP_VISIBLE_DEVICES}"
+    }
+  },
+  "remoteUser": "mahdikhashan",
+  "containerUser": "mahdikhashan",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.debugpy",
+        "ms-python.flake8",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools-themes",
+        "twxs.cmake"
+      ]
+    }
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
+  "updateRemoteUserUID": true,
+  "containerEnv": {
+    "HIP_VISIBLE_DEVICES": "0",
+    "USERNAME": "mahdikhashan",
+    "USER_UID": "501",
+    "USER_GID": "20"
+  },
+  "runArgs": [
+    "--device=/dev/kfd",
+    "--device=/dev/dri",
+    "--security-opt",
+    "seccomp=unconfined",
+    "--security-opt=label=disable",
+    "--group-add=video",
+    "--cap-add=SYS_PTRACE",
+    "--ipc=host"
+  ],
+  "name": "Triton-ROCm",
+  "postStartCommand": "${containerWorkspaceFolder}/.devcontainer/triton-amd/postStartCommand.sh",
+  "hostRequirements": {
+    "cpus": 8
+  }
+}

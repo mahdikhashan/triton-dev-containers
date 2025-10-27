@@ -1,0 +1,44 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "USERNAME": "mahdikhashan",
+      "USER_UID": "501",
+      "USER_GID": "20"
+    }
+  },
+  "remoteUser": "mahdikhashan",
+  "containerUser": "mahdikhashan",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.debugpy",
+        "ms-python.flake8",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools-themes",
+        "twxs.cmake"
+      ]
+    }
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
+  "updateRemoteUserUID": true,
+  "containerEnv": {
+    "USERNAME": "mahdikhashan",
+    "USER_UID": "501",
+    "USER_GID": "20"
+  },
+  "runArgs": [
+    "--security-opt=label=disable"
+  ],
+  "name": "Triton-CPU",
+  "postStartCommand": "${containerWorkspaceFolder}/.devcontainer/triton-cpu/postStartCommand.sh",
+  "hostRequirements": {
+    "cpus": 4,
+    "gpu": false
+  }
+}

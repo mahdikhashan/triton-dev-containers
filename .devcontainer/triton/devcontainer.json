@@ -1,0 +1,50 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "USERNAME": "mahdikhashan",
+      "USER_UID": "501",
+      "USER_GID": "20",
+      "CUSTOM_LLVM": "false",
+      "LLVM_TAG": ""
+    }
+  },
+  "remoteUser": "mahdikhashan",
+  "containerUser": "mahdikhashan",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.debugpy",
+        "ms-python.flake8",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools-themes",
+        "twxs.cmake"
+      ]
+    }
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
+  "updateRemoteUserUID": true,
+  "containerEnv": {
+    "INSTALL_CUDNN": "true",
+    "USERNAME": "mahdikhashan",
+    "USER_UID": "501",
+    "USER_GID": "20"
+  },
+  "runArgs": [
+    "--runtime=nvidia",
+    "--gpus",
+    "all",
+    "--security-opt=label=disable"
+  ],
+  "name": "Triton-CUDA",
+  "postStartCommand": "${containerWorkspaceFolder}/.devcontainer/triton/postStartCommand.sh",
+  "hostRequirements": {
+    "cpus": 4,
+    "gpu": "optional"
+  }
+}
