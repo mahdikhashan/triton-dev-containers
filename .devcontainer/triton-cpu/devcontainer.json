@@ -1,6 +1,7 @@
 {
   "build": {
     "dockerfile": "Dockerfile",
+    "options": ["--load"],
     "args": {
       "USERNAME": "mahdikhashan",
       "USER_UID": "501",
